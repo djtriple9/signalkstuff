@@ -1,4 +1,4 @@
-/*
+/* NOTE!!!! THIS IS NOT A SENSEESP PROGRAM!  THIS CODE OUTPUTS NMEA0183 COMPLIANT OUTPUTS DIRECTLY TO THE SERIAL PORT AND SHOULD BE PLUGGED DIRECTLY INTO THE SERVER AND SET UP AS AN NMEA0183 SERIAL DEVICE.
  * There are three serial ports on the ESP known as U0UXD, U1UXD and U2UXD.
  * 
  * U0UXD is used to communicate with the ESP32 for programming and during reset/boot.
