@@ -7,7 +7,7 @@
  * 
 */
 #include <QMC5883LCompass.h>
-#define RXD2 16
+#define RXD2 16  //These are the default pins for Node MCU ESP32S serial2
 #define TXD2 17
 QMC5883LCompass compass;
 int a;
