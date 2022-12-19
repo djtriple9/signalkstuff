@@ -1,4 +1,6 @@
-/* NOTE!!!! THIS IS NOT A SENSEESP PROGRAM!  THIS CODE OUTPUTS NMEA0183 COMPLIANT OUTPUTS DIRECTLY TO THE SERIAL PORT AND SHOULD BE PLUGGED DIRECTLY INTO THE SERVER AND SET UP AS AN NMEA0183 SERIAL DEVICE.
+/* NOTE!!!! THIS IS NOT A SENSEESP PROGRAM!  THIS CODE OUTPUTS NMEA0183 COMPLIANT OUTPUTS DIRECTLY TO THE SERIAL PORT
+ * AND SHOULD BE PLUGGED DIRECTLY INTO THE SERVER AND SET UP AS AN NMEA0183 SERIAL DEVICE. or hooked up to a TTL to RS232 device if you are hooking up to a Multiplexer or
+ * directly to your chartplotter.
  * There are three serial ports on the ESP known as U0UXD, U1UXD and U2UXD.
  * 
  * U0UXD is used to communicate with the ESP32 for programming and during reset/boot.
@@ -29,14 +31,14 @@ void loop() {
   Serial.println();
   compass.read();
   a = compass.getAzimuth();  //azimuth is the numerical output of you postiion as noted in degrees, 0-359.99
-  //now to build the NMEA string for the heading (HDG)
-  String HDG ="HDG,";
-  HDG += String(a);
-  HDG += ",,,,*"; 
+  //now to build the NMEA string for the magnetic heading (HDM)
+  String HDM ="$HDM,";
+  HDM += String(a);
+  HDM += ",M*"; 
   byte checksum = 0; //checksum is calculated based on the hex of the count of characters minus the "$" and "*"
-  for (int i = 1; i < HDG.length() - 1; i++)
-  checksum ^= HDG[i];
-  Serial.print(HDG);
+  for (int i = 1; i < HDM.length() - 1; i++)
+  checksum ^= HDM[i];
+  Serial.print(HDM);
   if (checksum < 0x10)
   Serial.print('0'); // Leading zero
   Serial.println(checksum, HEX);
