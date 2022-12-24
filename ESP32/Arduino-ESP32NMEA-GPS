@@ -12,7 +12,7 @@
 #define RXD2 16  //These are the default pins for Node MCU ESP32S serial2
 #define TXD2 17
 QMC5883LCompass compass;
-int a;
+float a;
 
 
 void setup() {
@@ -30,7 +30,7 @@ void loop() {
   }
   Serial.println();
   compass.read();
-  a = compass.getAzimuth();  //azimuth is the numerical output of you postiion as noted in degrees, 0-359.99
+  a = compass.getAzimuth()* 0.01745329251;  //azimuth is the numerical output of your postiion as noted in degrees, 0-359.99, NMEA 0183 standard require radians  0.01745329251 is calculated as a*Pi/180
   //now to build the NMEA string for the magnetic heading (HDM)
   String HDM ="$HDM,";
   HDM += String(a);
