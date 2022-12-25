@@ -19,13 +19,13 @@ void setup() {
   // Note the format for setting a serial port is as follows: Serial2.begin(baud-rate, protocol, RX pin, TX pin);
   Serial.begin(38400); //NMEA0183HS (high speed) standard is 38400; normal speed is 4800
   //Serial1.begin(9600, SERIAL_8N1, RXD2, TXD2); //enable only if you are using it; check you pinout docs!
-  Serial2.begin(9600, SERIAL_8N1, RXD2, TXD2);
+  Serial2.begin(9600, SERIAL_8N1, RXD2, TXD2);  //enable if you are using a serial GPS as well, like a BN-880Q
   compass.init();
   compass.setCalibration(-2586, 2806, -2440, 3605, -5750, 2085); //run the calibration code in examples, and it will spit out a value you put here. REQUIRED FOR ACCURACY.
   }
 
 void loop() { 
-  while (Serial2.available()) { //Choose Serial1 or Serial2 as required
+  while (Serial2.available()) { //Choose Serial1 or Serial2 as required, comment out whole while loop if not used or needed
     Serial.print(char(Serial2.read())); //no need to tweak as the output is already NMEA0183
   }
   Serial.println();
